@@ -3,9 +3,11 @@
 <suite name="Suite" verbose="5">
 	<test name="Test">
 		<classes>
-			<!-- <class name="tests.selenium.TC002_CreateIncidentAndGetFromRest"/> -->
+			<class name="tests.rest.TC001_Verify_ContentType_StatusCode_Get" />
+			<class name="tests.rest.TC002_Verify_Delete_Not_Permitted" />
+			<class name="tests.rest.TC003_Verify_Response_for_SpecificKey" />
 			<class
-				name="tests.selenium.TC003_CreateIncidentUsingRestAndVerifyUsingSelenium" />
+				name="tests.selenium.TC004_Compare_BrowserURL_with_JSON" />
 		</classes>
 	</test> <!-- Test -->
 </suite> <!-- Suite -->

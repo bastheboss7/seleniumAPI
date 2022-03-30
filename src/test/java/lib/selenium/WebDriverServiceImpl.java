@@ -104,13 +104,14 @@ public class WebDriverServiceImpl extends WebDriverListener implements WebDriver
 		String text = "";
 		try {
 			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-			wait.until(ExpectedConditions.elementToBeClickable(ele));			
+			wait.until(ExpectedConditions.elementToBeClickable(ele));
 			text = ele.getText();
 			ele.click();
 			reportStep("The element "+text+" is clicked", "PASS");
 		} catch (InvalidElementStateException e) {
 			reportStep("The element: "+text+" could not be clicked", "FAIL");
 		} catch (WebDriverException e) {
+			e.printStackTrace();
 			reportStep("Unknown exception occured while clicking in the field :", "FAIL");
 		} 
 	}
@@ -147,6 +148,17 @@ public class WebDriverServiceImpl extends WebDriverListener implements WebDriver
 		} catch (WebDriverException e) {
 			reportStep("Unknown Exception Occured While fetching Title", "FAIL");
 		} 
+		return bReturn;
+	}
+
+	public String getCurrentURL() {
+		String bReturn = "";
+		try {
+			bReturn =  driver.getCurrentUrl();
+			reportStep("Current URL captured", "PASS");
+		} catch (WebDriverException e) {
+			reportStep("Unknown Exception Occured While fetching Title", "FAIL");
+		}
 		return bReturn;
 	}
 
@@ -288,8 +300,10 @@ public class WebDriverServiceImpl extends WebDriverListener implements WebDriver
 			driver.switchTo().frame(ele);
 			reportStep("switch In to the Frame "+ele,"PASS");
 		} catch (NoSuchFrameException e) {
+			e.printStackTrace();
 			reportStep("WebDriverException : "+e.getMessage(), "FAIL");
 		} catch (WebDriverException e) {
+			e.printStackTrace();
 			reportStep("WebDriverException : "+e.getMessage(), "FAIL");
 		} 
 	}

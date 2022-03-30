@@ -53,7 +53,7 @@ public class PreAndPost extends WebDriverServiceImpl{
 		HTMLReporter.svcTest = test;		
 		
 		// settings for launching browser
-		System.setProperty("webdriver.chrome.driver", "./drivers/chromedriver.exe");
+		System.setProperty("webdriver.chrome.driver", "./drivers/chromedriver");
 		System.setProperty("webdriver.chrome.silentOutput", "true");
 
 		// Start browser
@@ -61,7 +61,7 @@ public class PreAndPost extends WebDriverServiceImpl{
 		driver = new EventFiringWebDriver(webdriver);
 		driver.register(this);
 		driver.manage().window().maximize();
-		driver.get("https://"+prop.getProperty("server"));
+		driver.get("https://"+prop.getProperty("url"));
 		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 	
 	}

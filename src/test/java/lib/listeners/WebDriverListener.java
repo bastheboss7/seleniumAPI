@@ -137,9 +137,7 @@ public class WebDriverListener extends HTMLReporter implements WebDriverEventLis
 		long number = (long) Math.floor(Math.random() * 900000000L) + 10000000L;
 		try {
 			FileUtils.copyFile(driver.getScreenshotAs(OutputType.FILE) , new File("./reports/images/"+number+".png"));
-		} catch (WebDriverException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
+		} catch (WebDriverException | IOException e) {
 			e.printStackTrace();
 		}
 		return number;

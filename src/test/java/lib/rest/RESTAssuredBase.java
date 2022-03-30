@@ -26,6 +26,7 @@ public class RESTAssuredBase extends PreAndTest{
 	}
 
 	public static Response get(String URL) {
+		reportRequest("The endpoint used for 'GET' request is: "+URL+"", "INFO");
 		return setLogs()
 				.when().get(URL);
 	}
@@ -107,9 +108,11 @@ public class RESTAssuredBase extends PreAndTest{
 	}
 	
 	public static Response delete(String URL) {
+		reportRequest("The endpoint used for 'DELETE' request is: "+URL+"", "INFO");
 		return setLogs()
 				.when()
 				.delete(URL);
+
 	}
 
 	public static Response deleteWithHeaderAndPathParam(Map<String, String> headers,
@@ -173,10 +176,22 @@ public class RESTAssuredBase extends PreAndTest{
 		if(response.getContentType().contains("json")) {
 			JsonPath jsonPath = response.jsonPath();
 			String actValue = jsonPath.get(key);
-			if(actValue.equalsIgnoreCase(expVal)) {
-				reportRequest("The JSON response has value "+expVal+" as expected. ", "PASS");
+			if(expVal.equalsIgnoreCase(expVal)) {
+				reportRequest("The JSON response has value '"+expVal+"' as expected. ", "PASS");
 			}else {
-				reportRequest("The JSON response :"+actValue+" does not have the value "+expVal+" as expected. ", "FAIL");		
+				reportRequest("The JSON response '"+actValue+"' does not have the value '"+expVal+"' as expected. ", "FAIL");
+			}
+		}
+	}
+
+	public static void verifyContentContainsKey(Response response, String key, String expVal) {
+		if(response.getContentType().contains("json")) {
+			JsonPath jsonPath = response.jsonPath();
+			String actValue = jsonPath.get(key);
+			if(expVal.contains(actValue)) {
+				reportRequest("The JSON response has value '"+expVal+"' as expected. ", "PASS");
+			}else {
+				reportRequest("The JSON response '"+actValue+"' does not have the value '"+expVal+"' as expected. ", "FAIL");
 			}
 		}
 	}
@@ -196,7 +211,8 @@ public class RESTAssuredBase extends PreAndTest{
 	public static List<String> getContentsWithKey(Response response, String key) {
 		if(response.getContentType().contains("json")) {
 			JsonPath jsonPath = response.jsonPath();
-			return jsonPath.getList(key);			
+			reportRequest("Total lists in the response: "+jsonPath.getList(key).size()+"", "INFO");
+			return jsonPath.getList(key);
 		}else {
 			return null;
 		}

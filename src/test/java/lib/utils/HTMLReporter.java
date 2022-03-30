@@ -32,7 +32,7 @@ public abstract class HTMLReporter {
 		}
 		RestAssured.baseURI = "https://"+prop.getProperty("server")+"/"+prop.getProperty("resources")+"/";
 		html = new ExtentHtmlReporter("./reports/result.html");
-		html.setAppendExisting(true);
+		html.setAppendExisting(false);
 		html.loadXMLConfig("./src/test/resources/extent-config.xml");
 		extent = new ExtentReports();
 		extent.attachReporter(html);		
@@ -96,6 +96,8 @@ public abstract class HTMLReporter {
 			throw new RuntimeException();
 		}else if(status.equalsIgnoreCase("WARNING")) {
 			svcTest.warning(desc, img);		
+		}else if(status.equalsIgnoreCase("INFO")) {
+			svcTest.info(desc, img);
 		}else {
 			svcTest.info(desc);
 		}	
