@@ -13,7 +13,7 @@ Run from IntelliJ runner after configuring the runner as 'TestNG', Test kind as 
 
 # Extent Reporting
 
-Extent reports can be found at, /Users/**/**/Makaia/reports (Mac)
+Extent reports can be found at, /Users/@@/@@/Makaia/reports (Mac)
 
 It generates screenshot for web tests and test description for api tests. 
 
